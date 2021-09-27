@@ -4,4 +4,17 @@ ping脚本指向市电路由，无ping断电关机。市电路由加开机唤醒
 
 # build
 
+```
+go build -o /bin/ups_poweroff .
+```
+
 # usage
+
+```
+-g string
+  	Gateway
+-i int
+  	Interval (Second) (default 3)
+-r uint
+  	Retry count (default 10)
+```
