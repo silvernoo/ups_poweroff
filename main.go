@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"net"
 	"os"
+	"os/exec"
 	"os/signal"
-	"runtime"
 	"syscall"
 	"time"
 	"ups_poweroff/goping"
@@ -30,14 +30,14 @@ func main() {
 	timer := time.NewTimer(time.Duration(*interval) * time.Second)
 out:
 	for {
-		timer.Reset(time.Duration(*interval) * time.Second) // 这里复用了 timer
+		timer.Reset(time.Duration(*interval) * time.Second)
 		select {
 		case <-timer.C:
 			if _, err := goping.SendICMPRequest(goping.GetICMP(uint16(1)), raddr); err != nil {
 				fmt.Printf("Error: %s\n", err)
 				counter++
 				if counter >= *retry {
-					fmt.Printf("poweroff%s\n", runtime.GOOS)
+					power0ff()
 					counter = 0
 				}
 			} else {
@@ -46,5 +46,12 @@ out:
 		case <-c:
 			break out
 		}
+	}
+}
+
+func power0ff() {
+	_, err := exec.Command("bash","-c", "shutdown -h now").Output()
+	if err != nil {
+		fmt.Println(err)
 	}
 }
