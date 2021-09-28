@@ -18,3 +18,6 @@ go build -o /bin/ups_poweroff .
 -r uint
   	Retry count (default 10)
 ```
+
+# wol脚本
+https://gist.github.com/vincascm/7fa72a8c27933736d802
