@@ -1,0 +1,148 @@
+kind: pipeline
+type: docker
+name: linux_amd64
+
+environment:
+  GOOS: linux
+  GOARCH: amd64
+  CGO_ENABLED: 0
+
+steps:
+  - name: build-linux-amd64
+    image: golang:1.21.4
+    commands:
+      - go build
+      - ls -al
+  - name: upload
+    image: minio/mc
+    environment:
+      DRONE_ACCESS_KEY:
+        from_secret: drone_access_key
+      DRONE_SECRET_KEY:
+        from_secret: drone_secret_key
+    commands:
+      - mv ups_poweroff ups-poweroff-linux-amd64
+      - mc config host add minio http://192.168.0.10:8011 $DRONE_ACCESS_KEY $DRONE_SECRET_KEY
+      - mc cp ups-poweroff-linux-amd64 minio/transmission-diff-tool
+      - rm ups-poweroff-linux-amd64
+
+
+---
+kind: pipeline
+type: docker
+name: linux_arm64
+
+environment:
+  GOOS: linux
+  GOARCH: arm64
+  CGO_ENABLED: 0
+
+steps:
+  - name: build-linux-arm64
+    image: golang:1.21.4
+    commands:
+      - go build
+      - ls -al
+  - name: upload
+    image: minio/mc
+    environment:
+      DRONE_ACCESS_KEY:
+        from_secret: drone_access_key
+      DRONE_SECRET_KEY:
+        from_secret: drone_secret_key
+    commands:
+      - mv ups_poweroff ups-poweroff-linux-arm64
+      - mc config host add minio http://192.168.0.10:8011 $DRONE_ACCESS_KEY $DRONE_SECRET_KEY
+      - mc cp ups-poweroff-linux-arm64 minio/transmission-diff-tool
+      - rm ups-poweroff-linux-arm64
+
+
+
+---
+kind: pipeline
+type: docker
+name: darwin_amd64
+
+environment:
+  GOOS: darwin
+  GOARCH: amd64
+  CGO_ENABLED: 0
+
+steps:
+  - name: build-darwin-amd64
+    image: golang:1.21.4
+    commands:
+      - go build
+      - ls -al
+  - name: upload
+    image: minio/mc
+    environment:
+      DRONE_ACCESS_KEY:
+        from_secret: drone_access_key
+      DRONE_SECRET_KEY:
+        from_secret: drone_secret_key
+    commands:
+      - mv ups_poweroff ups-poweroff-darwin-amd64
+      - mc config host add minio http://192.168.0.10:8011 $DRONE_ACCESS_KEY $DRONE_SECRET_KEY
+      - mc cp ups-poweroff-darwin-amd64 minio/transmission-diff-tool
+      - rm ups-poweroff-darwin-amd64
+
+
+---
+kind: pipeline
+type: docker
+name: darwin_arm64
+
+environment:
+  GOOS: darwin
+  GOARCH: arm64
+  CGO_ENABLED: 0
+
+steps:
+  - name: build-darwin-arm64
+    image: golang:1.21.4
+    commands:
+      - go build
+      - ls -al
+  - name: upload
+    image: minio/mc
+    environment:
+      DRONE_ACCESS_KEY:
+        from_secret: drone_access_key
+      DRONE_SECRET_KEY:
+        from_secret: drone_secret_key
+    commands:
+      - mv ups_poweroff ups-poweroff-darwin-arm64
+      - mc config host add minio http://192.168.0.10:8011 $DRONE_ACCESS_KEY $DRONE_SECRET_KEY
+      - mc cp ups-poweroff-darwin-arm64 minio/transmission-diff-tool
+      - rm ups-poweroff-darwin-arm64
+
+
+---
+kind: pipeline
+type: docker
+name: windows_amd64
+
+environment:
+  GOOS: windows
+  GOARCH: amd64
+  CGO_ENABLED: 0
+
+steps:
+  - name: build-windows-amd64
+    image: golang:1.21.4
+    commands:
+      - go build
+      - ls -al
+  - name: upload
+    image: minio/mc
+    environment:
+      DRONE_ACCESS_KEY:
+        from_secret: drone_access_key
+      DRONE_SECRET_KEY:
+        from_secret: drone_secret_key
+    commands:
+      - mv ups_poweroff.exe ups-poweroff-windows-amd64.exe
+      - mc config host add minio http://192.168.0.10:8011 $DRONE_ACCESS_KEY $DRONE_SECRET_KEY
+      - mc cp ups-poweroff-windows-amd64.exe minio/transmission-diff-tool
+      - rm ups-poweroff-windows-amd64.exe
