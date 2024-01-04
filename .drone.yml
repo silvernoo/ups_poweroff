@@ -23,7 +23,7 @@ steps:
     commands:
       - mv ups_poweroff ups-poweroff-linux-amd64
       - mc config host add minio http://192.168.0.10:8011 $DRONE_ACCESS_KEY $DRONE_SECRET_KEY
-      - mc cp ups-poweroff-linux-amd64 minio/transmission-diff-tool
+      - mc cp ups-poweroff-linux-amd64 minio/ups-poweroff
       - rm ups-poweroff-linux-amd64
 
 
@@ -53,7 +53,7 @@ steps:
     commands:
       - mv ups_poweroff ups-poweroff-linux-arm64
       - mc config host add minio http://192.168.0.10:8011 $DRONE_ACCESS_KEY $DRONE_SECRET_KEY
-      - mc cp ups-poweroff-linux-arm64 minio/transmission-diff-tool
+      - mc cp ups-poweroff-linux-arm64 minio/ups-poweroff
       - rm ups-poweroff-linux-arm64
 
 
@@ -84,7 +84,7 @@ steps:
     commands:
       - mv ups_poweroff ups-poweroff-darwin-amd64
       - mc config host add minio http://192.168.0.10:8011 $DRONE_ACCESS_KEY $DRONE_SECRET_KEY
-      - mc cp ups-poweroff-darwin-amd64 minio/transmission-diff-tool
+      - mc cp ups-poweroff-darwin-amd64 minio/ups-poweroff
       - rm ups-poweroff-darwin-amd64
 
 
@@ -114,7 +114,7 @@ steps:
     commands:
       - mv ups_poweroff ups-poweroff-darwin-arm64
       - mc config host add minio http://192.168.0.10:8011 $DRONE_ACCESS_KEY $DRONE_SECRET_KEY
-      - mc cp ups-poweroff-darwin-arm64 minio/transmission-diff-tool
+      - mc cp ups-poweroff-darwin-arm64 minio/ups-poweroff
       - rm ups-poweroff-darwin-arm64
 
 
@@ -144,5 +144,5 @@ steps:
     commands:
       - mv ups_poweroff.exe ups-poweroff-windows-amd64.exe
       - mc config host add minio http://192.168.0.10:8011 $DRONE_ACCESS_KEY $DRONE_SECRET_KEY
-      - mc cp ups-poweroff-windows-amd64.exe minio/transmission-diff-tool
+      - mc cp ups-poweroff-windows-amd64.exe minio/ups-poweroff
       - rm ups-poweroff-windows-amd64.exe
