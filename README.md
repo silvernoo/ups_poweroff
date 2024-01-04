@@ -7,6 +7,7 @@ ping脚本指向市电路由，无ping断电关机。市电路由加开机唤醒
 ```
 go build -o /bin/ups_poweroff .
 ```
+https://min.dangofans.top/browser/ups-poweroff
 
 # usage
 
