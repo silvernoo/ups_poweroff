@@ -1,0 +1,37 @@
+# This workflow will build a golang project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-go
+
+name: Go
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.20'
+
+    - name: Build
+      run: |
+        GOOS=linux GOARCH=amd64 go build -ldflags "-s -w" -o dist/ups-poweroff-linux-amd64 .
+        GOOS=linux GOARCH=arm64 go build -ldflags "-s -w" -o dist/ups-poweroff-linux-arm64 .
+        GOOS=windows GOARCH=amd64 go build -ldflags "-s -w" -o dist/ups-poweroff-windows-amd64.exe .
+        GOOS=darwin GOARCH=amd64 go build -ldflags "-s -w" -o dist/ups-poweroff-darwin-amd64 .
+        GOOS=darwin GOARCH=arm64 go build -ldflags "-s -w" -o dist/ups-poweroff-darwin-arm64 .
+        ls -la dist/
+                - name: Github Release
+    - name: Github Release
+      uses: elgohr/Github-Release-Action@v5
+      with:
+        title: "App Release ${{ github.ref_name }}"
+        workdir: dist/
