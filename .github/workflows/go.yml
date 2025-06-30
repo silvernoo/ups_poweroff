@@ -30,8 +30,8 @@ jobs:
         GOOS=darwin GOARCH=arm64 go build -ldflags "-s -w" -o dist/ups-poweroff-darwin-arm64 .
         ls -la dist/
     - name: Release
-      uses: fnkr/github-action-ghr@v1
+      uses: softprops/action-gh-release@v2
+      with:
+        files: dist/*
       env:
-        GHR_PATH: dist/
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
