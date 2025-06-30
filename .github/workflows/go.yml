@@ -29,7 +29,6 @@ jobs:
         GOOS=darwin GOARCH=amd64 go build -ldflags "-s -w" -o dist/ups-poweroff-darwin-amd64 .
         GOOS=darwin GOARCH=arm64 go build -ldflags "-s -w" -o dist/ups-poweroff-darwin-arm64 .
         ls -la dist/
-                - name: Github Release
     - name: Github Release
       uses: elgohr/Github-Release-Action@v5
       with:
